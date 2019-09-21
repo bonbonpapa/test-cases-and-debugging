@@ -12,11 +12,19 @@ let verifyEquals = (lhs, rhs) => {
 }
 // we need 5 test cases. 
 let inputs = [
-
+    "AAACCC",
+    "how are you",
+    "A c b",
+    "A c b?",
+    "how are you? "
 ]
 
 let outputs = [
-
+    "CCCAAA",
+    "uoy era woh",
+    "b c A",
+    "?b c A",
+    " ?uoy era woh"
 ]
 
 /*
@@ -32,13 +40,24 @@ HINTS:
  
 */
 function f(str) {
+    let arr1 = [];
+    for (let i = 0; i < str.length; i++)
+        arr1.push(str[i]);
+    let arr2 = [];
+    for (i = 0; i < arr1.length; i++)
+        arr2[i] = arr1[(arr1.length -1) - i];
 
+    let newStr = arr2.join("");
+
+    return newStr;
 }
 
 function runTest(i) {
     if (i > inputs.length) throw new Error("You do not have enough test cases");
     let expected = outputs[i];
+        console.log(expected);
     let actual = f(inputs[i]);
+        console.log(actual);
     verifyEquals(expected, actual)
 }
 

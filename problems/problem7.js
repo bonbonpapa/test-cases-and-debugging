@@ -12,11 +12,23 @@ let verifyEquals = (lhs, rhs) => {
 }
 // we need 7 test cases. 
 let inputs = [
-
+    ["foo", 3],
+    ["fo", 3],
+    ["Hello", 5],
+    ["Hello ", 5],
+    [{ff: "foo"}, 3],
+    ["fo", -1],
+    ["fo", "fo"]
 ]
 
 let outputs = [
-
+    "foofoofoo",
+    "fofofo",
+    "HelloHelloHelloHelloHello",
+    "Hello Hello Hello Hello Hello ",
+    undefined,
+    "",
+    undefined
 ]
 
 /*
@@ -31,13 +43,28 @@ f(["fo", 3]) // "fofofo"
 f(["foo", -1]) // ""
 */
 function f(arr) {
-
+    if ( typeof arr[0] !== "string" ||
+         typeof arr[1] !== "number" )
+        {
+            return undefined;
+        }
+    let rtStr = "";
+    if ( arr[1] <=0 )
+        rtStr = "";
+    else {
+        for (let i = 0; i < arr[1]; i++)
+            rtStr = rtStr.concat(arr[0]);
+    }
+    
+    return rtStr;
 }
 
 function runTest(i) {
     if (i > inputs.length) throw new Error("You do not have enough test cases");
     let expected = outputs[i];
+        console.log(expected);
     let actual = f(inputs[i]);
+        console.log(actual);
     verifyEquals(expected, actual)
 }
 

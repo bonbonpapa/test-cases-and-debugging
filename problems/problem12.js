@@ -14,13 +14,15 @@ let verifyEquals = (lhs, rhs) => {
 let inputs = [
     [[0, 1, 2, 3], [1, 3, 4, 5]],
     [[1, 2, 3], [1, 2, 3]],
-    [2, 3]
+    [2, 3],
+    [["oo","aa"],["aa","cc"]]
 ]
 
 let outputs = [
     [0, 2, 4, 5],
     [],
-    undefined
+    undefined,
+    ["oo","cc"]
 ]
 
 /*
@@ -38,13 +40,56 @@ HINTS:
    - Use a for loop inside another for loop
 */
 function f(input) {
+    if( !Array.isArray(input) || 
+        !Array.isArray(input[0]) ||
+        !Array.isArray(input[1]) )
+        return undefined;
+    
+    let rtArr = [];
+    let i = 0;
+    let j = 0;
+    let sameElement = false;
+    for (i = 0 ; i < input[0].length ; i++)
+    {
+        sameElement = false;
+        for (j = 0 ; j < input[1].length; j++)
+        {
+            if (input[0][i] === input[1][j])
+            {
+                sameElement = true;
+                break;
+            }                
+        }
+        if(!sameElement)
+                rtArr.push(input[0][i]);
+    }
+    
+    sameElement = false;
+    for (i = 0 ; i < input[1].length ; i++)
+    {
+        sameElement = false;
+        for (j = 0 ; j < input[0].length; j++)
+        {
+            if (input[1][i] === input[0][j]) // can we judege the object equlity with ===?
+            {
+                sameElement = true;
+                break; // how to break out from tow layer loop
+            }
+                
+        }
+        if(!sameElement)
+                rtArr.push(input[1][i]);
+    }
+    return rtArr;
 
 }
 
 function runTest(i) {
     if (i > inputs.length) throw new Error("You do not have enough test cases");
     let expected = outputs[i];
+        console.log(expected);
     let actual = f(inputs[i]);
+        console.log(actual);
     verifyEquals(expected, actual)
 }
 
@@ -52,6 +97,6 @@ runTest(0);
 runTest(1);
 runTest(2);
 runTest(3);
-runTest(4);
+// runTest(4);
 
 console.log("All tests passed for " + __filename)

@@ -14,16 +14,19 @@ let verifyEquals = (lhs, rhs) => {
 
 // We need 5 test cases. I provided 1 input
 let inputs = [
-    "abc"
+    "abc", "0bcd", " ABC", "DEF", "ZZZ"
 ]
 
 let outputs = [
-    "a"
+    "a", undefined, undefined, "D", "Z"
 ]
 
 // Make this function return the first letter of the string that is passed to it. If the string does not have a first letter, return undefined
 function f(str) {
-
+    let fletter = str.charAt(0);
+    if (fletter.toUpperCase() !== fletter.toLowerCase())
+        return fletter;
+    return undefined;  
 }
 
 function runTest(i) {

@@ -14,12 +14,24 @@ let verifyEquals = (lhs, rhs) => {
 // we need 8 test cases. I've provided the first 2
 let inputs = [
   ["hello", 4],
-  ["", 2]
+  ["", 2],
+  ["ppp6",-1],
+  ["bye",3],
+  ["bye",2],  
+  ["good Bye",5],
+  ["good bye",5],
+  ["good bye",4]
 ]
 
 let outputs = [
   "o",
-  undefined
+  undefined,
+  undefined,
+  undefined,
+  "e",
+  "B",
+  "b",
+  " "
 ]
 
 /*
@@ -32,7 +44,13 @@ f(["abc", 0]); // a
 
 */
 function f(arr) {
+  let iIndex = arr[1];
+  if ( iIndex >= arr[0].length || 
+       iIndex < 0 )
+       return undefined;
+  let letterChar = arr[0].charAt(iIndex);
 
+  return letterChar;
 }
 
 function runTest(i) {
