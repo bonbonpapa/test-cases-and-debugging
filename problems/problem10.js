@@ -41,6 +41,11 @@ function f(str) {
         strArr[i] = strArr[i].toLowerCase();
         let fLetter = strArr[i].charAt(0).toUpperCase();
         strArr[i] = fLetter + strArr[i].slice(1);
+
+        // // capiitalized.push(
+        //     words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase()
+        //     );
+        // //
         
     }
     return strArr.join(" ");

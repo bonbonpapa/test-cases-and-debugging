@@ -54,6 +54,7 @@ function f(arr) {
     else {
         for (let i = 0; i < arr[1]; i++)
             rtStr = rtStr.concat(arr[0]);
+            //ret += str;
     }
     
     return rtStr;
